@@ -15,4 +15,7 @@ public interface ProductRest {
 
     @GetMapping(path = "/getAllProduct")
     public ResponseEntity<List<Product>> getAllProduct();
+
+    @PostMapping(path = "/updateProduct")
+    public ResponseEntity<String> updateProduct(@RequestBody(required = true)Map<String, String> requestMap);
 }
