@@ -67,6 +67,22 @@ public class ProductServiceImpl implements ProductService {
         return new ResponseEntity<String>("{\"message\":\""+"Something went wrong at product service Impl"+"\"}", HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+    @Override
+    public ResponseEntity<String> deleteProduct(int productId) {
+        try {
+            if(productId > 0){
+                productDao.deleteById(productId);
+                return new ResponseEntity<String>("{\"message\":\""+"Product Delete Successfully."+"\"}", HttpStatus.OK);
+            } else {
+                return new ResponseEntity<String>("{\"message\":\""+"Invalid Product Id."+"\"}", HttpStatus.BAD_REQUEST);
+            }
+
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+        return new ResponseEntity<String>("{\"message\":\""+"Something went wrong."+"\"}", HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
     private boolean validateAddNewProduct(Map<String, String> requestMap, Boolean validateId){
         if(requestMap.containsKey("name") && requestMap.containsKey("price") && requestMap.containsKey("description")){
             if(validateId && requestMap.containsKey("productId")){

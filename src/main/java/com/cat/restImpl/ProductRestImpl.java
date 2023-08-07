@@ -48,4 +48,15 @@ public class ProductRestImpl implements ProductRest {
         }
         return new ResponseEntity<String>("{\"message\":\""+"Something went wrong"+"\"}", HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+    @Override
+    public ResponseEntity<String> deleteProduct(int productId) {
+        try{
+            return productService.deleteProduct(productId);
+        }
+        catch (Exception ex){
+            ex.printStackTrace();
+        }
+        return new ResponseEntity<String>("{\"message\":\""+"Something went wrong"+"\"}", HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 }
